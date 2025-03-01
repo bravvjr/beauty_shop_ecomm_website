@@ -15,7 +15,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 
-
 def create_app():
     """
     Factory function to create and configure the Flask application.
@@ -23,7 +22,7 @@ def create_app():
     app = Flask(__name__)
 
     # Load configuration
-    app.config.from_object('website.config.Config')
+    app.config.from_object(Config)  # Use the Config class directly
 
     # Initialize extensions with the app
     db.init_app(app)
@@ -59,8 +58,9 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(admin, url_prefix='/')
 
-    # Create database tables (for development only)
-    with app.app_context():
-        db.create_all()
+    # Create database tables (only for development, not in production)
+    if app.config["DEBUG"] == "development":
+        with app.app_context():
+            db.create_all()
 
     return app
