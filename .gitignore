@@ -2,6 +2,7 @@
 venv/
 instance/
 __pycache__/
+migrations/
 
 .vscode/
 
