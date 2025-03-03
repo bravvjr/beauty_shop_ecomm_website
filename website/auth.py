@@ -73,13 +73,16 @@ def log_out():
     logout_user()
     return redirect('/')
 
+@auth.route('/user-profile')
+@login_required
+def user_profile():
+    return render_template('user_profile.html')
 
 @auth.route('/profile/<int:customer_id>')
 @login_required
 def profile(customer_id):
     customer = Customer.query.get(customer_id)
     return render_template('profile.html', customer=customer)
-
 
 @auth.route('/change-password/<int:customer_id>', methods=['GET', 'POST'])
 @login_required

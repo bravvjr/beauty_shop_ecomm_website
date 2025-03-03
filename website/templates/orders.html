@@ -1,8 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'user_profile.html' %}
 
 {% block title %} Orders {% endblock %}
 
 {% block body %}
+
 <div class="container mt-5" style="background-color: #ffffff; color: #000; padding: 20px; border-radius: 10px;">
     <h1 class="text-center">Orders</h1>
     <h4 class="text-center text-muted">Recent Orders</h4>
@@ -36,7 +37,9 @@
                 </div>
             </div>
         </div>
+
         {% endfor %}
+
     </div>
 </div>
 
