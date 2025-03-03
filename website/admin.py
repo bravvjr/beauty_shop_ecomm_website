@@ -24,21 +24,20 @@ def add_shop_items():
     form = ShopItemsForm()
     if form.validate_on_submit():
         product_name = form.product_name.data
+        description = form.description.data  # Fetch description from form
         current_price = form.current_price.data
         previous_price = form.previous_price.data
         in_stock = form.in_stock.data
         flash_sale = form.flash_sale.data
-
         file = form.product_picture.data
 
         file_name = secure_filename(file.filename)
-
         file_path = f'./media/{file_name}'
-
         file.save(file_path)
 
         new_product = Product(
             product_name=product_name,
+            description=description,  # Save description
             current_price=current_price,
             previous_price=previous_price,
             in_stock=in_stock,
@@ -57,7 +56,6 @@ def add_shop_items():
             flash('Failed to add product. Please try again.', 'danger')
 
     return render_template('add_shop_items.html', form=form)
-
 
 @admin.route('/shop-items')
 @login_required
@@ -247,3 +245,26 @@ def payments():
         page=page, per_page=per_page)
 
     return render_template('payments.html', payments=payments, search_query=search_query)
+
+
+@admin.route('/edit-product/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+    product = Product.query.get_or_404(product_id)
+
+    if request.method == 'POST':
+        print(request.form)  # Debug: Ensure description is received
+
+        new_description = request.form.get('description')
+        print(f"Updating description: {new_description}")  # Debug
+
+        if new_description:
+            product.description = new_description
+            db.session.add(product)  # Ensure object is marked as changed
+            db.session.commit()
+            db.session.refresh(product)  # Ensure data is fetched from DB
+            print(f"Saved Description: {product.description}")  # Debug
+
+            flash('Product description updated successfully!', 'success')
+            return redirect(url_for('shop_items'))
+
+    return render_template('edit_product.html', product=product)
