@@ -36,42 +36,32 @@
       rel="stylesheet"
     />
     <style>
-     /* Custom table styles */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #ffffff; /* White text */
-    background-color: transparent; /* Transparent background */
-}
+      /* Add margin-top to the table container */
+      .table-container {
+        margin-top: 100px; /* Adjust this value as needed */
+        overflow-x: auto; /* Add horizontal scroll if the table is too wide */
+      }
 
-.table th,
-.table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light border for visibility */
-}
+      /* Ensure the table is responsive */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-.table th {
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for headers */
-    color: #ffffff; /* White text */
-}
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
 
-.table tr:hover {
-    background-color: rgba(255, 255, 255, 0.05); /* Light hover effect */
-}
+      th {
+        background-color: #f8f9fa;
+        color: #333; /* Dark text for better readability */
+      }
 
-/* Button styles */
-.btn-primary {
-    background-color: #d63384; /* Pink button */
-    border-color: #d63384;
-    color: #ffffff; /* White text */
-}
-
-.btn-danger {
-    background-color: #ff1493; /* Dark pink button */
-    border-color: #ff1493;
-    color: #ffffff; /* White text */
-}
+      tr:hover {
+        background-color: #f1f1f1; /* Highlight rows on hover */
+      }
     </style>
   </head>
 
