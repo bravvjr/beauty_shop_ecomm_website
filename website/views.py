@@ -74,19 +74,29 @@ def product_section():
 @login_required
 def add_to_cart(item_id):
     item_to_add = Product.query.get(item_id)
+    
+    # Check if the item is out of stock
+    if item_to_add.in_stock <= 0:
+        flash(f'{item_to_add.product_name} is out of stock and cannot be added to the cart.')
+        return redirect(request.referrer)
+    
     item_exists = Cart.query.filter_by(
         product_link=item_id, customer_link=current_user.id).first()
+    
     if item_exists:
         try:
+            # Check if adding more items exceeds the available stock
+            if item_exists.quantity + 1 > item_to_add.in_stock:
+                flash(f'Cannot add more {item_to_add.product_name} to the cart. Only {item_to_add.in_stock} items are available.')
+                return redirect(request.referrer)
+            
             item_exists.quantity = item_exists.quantity + 1
             db.session.commit()
-            flash(
-                f' Quantity of { item_exists.product.product_name } has been updated')
+            flash(f'Quantity of {item_exists.product.product_name} has been updated')
             return redirect(request.referrer)
         except Exception as e:
             print('Quantity not Updated', e)
-            flash(
-                f'Quantity of { item_exists.product.product_name } not updated')
+            flash(f'Quantity of {item_exists.product.product_name} not updated')
             return redirect(request.referrer)
 
     new_cart_item = Cart()

@@ -134,21 +134,25 @@
                       aria-current="page"
                       href="/orders"
                     >
-                      <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
                       Orders
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-2" href="/profile/{{ current_user.id }}">
-                      <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                    <a
+                      class="nav-link d-flex align-items-center me-2 active"
+                      aria-current="page"
+                      href="/profile/{{ current_user.id }}"
+                    >
                       Account
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link me-2" href="#">
-                      <i
-                        class="fas fa-user-circle opacity-6 text-dark me-1"
-                      ></i>
+                    <a
+                      class="nav-link d-flex align-items-center me-2 active"
+                      aria-current="page"
+                      href="#"
+                    >
+                      
                       Reviews
                     </a>
                   </li>
