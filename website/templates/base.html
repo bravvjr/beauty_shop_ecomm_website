@@ -260,78 +260,83 @@
       ></button>
     </div>
     {% endfor %} {% block body %} {% endblock %}
-
-    
-    <footer class="bg-black text-white py-5">
-      <style>
-          footer {
-              background-color: black;
-              color: white;
-              padding: 40px 0;
-          }
-  
-          footer a {
-              text-decoration: none;
-              color: #ff69b4; /* Pink color */
-          }
-  
-          footer a:hover {
-              color: #ff1493; /* Darker pink */
-          }
-  
-          .text-pink {
-              color: #ff69b4;
-          }
-  
-          .text-pink:hover {
-              color: #ff1493;
-          }
-      </style>
-  <footer class="small-footer bg-light py-2">
-    <div class="container">
+    <footer class="footer">
+      <div class="container">
         <div class="row text-center text-md-start align-items-center">
-            <!-- Social Media Icons -->
-            <div class="col-md-2 mb-2">
-                <div>
-                    <a href="#" class="text-pink me-2"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-pink me-2"><i class="bi bi-youtube"></i></a>
-                    <a href="#" class="text-pink"><i class="bi bi-linkedin"></i></a>
-                </div>
+          <!-- Social Media Icons -->
+          <div class="col-md-2 mb-2">
+            <div>
+              <a href="#" class="text-pink me-2"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="text-pink me-2"><i class="bi bi-youtube"></i></a>
+              <a href="#" class="text-pink"><i class="bi bi-linkedin"></i></a>
             </div>
-
-            <!-- Use Cases -->
-            <div class="col-md-2 mb-2">
-                <h6 class="text-uppercase fw-bold">Use Cases</h6>
-                <ul class="list-unstyled small">
-                    <li><a href="#">UI Design</a></li>
-                    <li><a href="#">UX Design</a></li>
-                    <li><a href="#">Wireframing</a></li>
-                </ul>
-            </div>
-
-            <!-- Explore -->
-            <div class="col-md-2 mb-2">
-                <h6 class="text-uppercase fw-bold">Explore</h6>
-                <ul class="list-unstyled small">
-                    <li><a href="#">Design</a></li>
-                    <li><a href="#">Prototyping</a></li>
-                    <li><a href="#">Design Systems</a></li>
-                </ul>
-            </div>
-
-            <!-- Resources -->
-            <div class="col-md-2 mb-2">
-                <h6 class="text-uppercase fw-bold">Resources</h6>
-                <ul class="list-unstyled small">
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Developers</a></li>
-                </ul>
-            </div>
+          </div>
+    
+          <!-- Use Cases -->
+          <div class="col-md-2 mb-2">
+            <h6 class="text-uppercase fw-bold">Use Cases</h6>
+            <ul class="list-unstyled small">
+              <li><a href="#">UI Design</a></li>
+              <li><a href="#">UX Design</a></li>
+              <li><a href="#">Wireframing</a></li>
+            </ul>
+          </div>
+    
+          <!-- Explore -->
+          <div class="col-md-2 mb-2">
+            <h6 class="text-uppercase fw-bold">Explore</h6>
+            <ul class="list-unstyled small">
+              <li><a href="#">Design</a></li>
+              <li><a href="#">Prototyping</a></li>
+              <li><a href="#">Design Systems</a></li>
+            </ul>
+          </div>
+    
+          <!-- Resources -->
+          <div class="col-md-2 mb-2">
+            <h6 class="text-uppercase fw-bold">Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Developers</a></li>
+            </ul>
+          </div>
         </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+      </div>
+    </footer>
+    
+    <style>
+      /* Footer Styles */
+      .footer {
+        background-color: black; /* Black background */
+        color: #ff69b4; /* Pink text */
+        padding: 40px 0;
+        position: relative;
+        width: 100%;
+      }
+    
+      /* Footer Links */
+      .footer a {
+        text-decoration: none;
+        color: #ff69b4; /* Pink color */
+      }
+    
+      .footer a:hover {
+        color: #ff1493; /* Darker pink */
+      }
+    
+      /* Ensure Footer is at Bottom */
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+    
+      .footer {
+        margin-top: auto;
+      }
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="{{ url_for( 'static', filename='js/owl.carousel.min.js') }}"></script>
     <script src="{{ url_for( 'static', filename='js/all.min.js') }}"></script>
