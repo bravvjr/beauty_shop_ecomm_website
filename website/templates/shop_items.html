@@ -3,51 +3,72 @@
 {% block title %}Shop Items{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
+<div class="container mt-4">
     {% if items | length < 1 %}
-        <h3 style="color: #d63384; text-align: center;">No Shop Items</h3>
+        <h3 class="text-center text-danger">No Shop Items Available</h3>
     {% else %}
-        <table class="table table-hover" style="background-color: #ffffff; color: #000000;">
-            <thead style="background-color: #ff69b4; color: #ffffff;">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Date Added</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Previous Price</th>
-                    <th scope="col">Current Price</th>
-                    <th scope="col">In Stock</th>
-                    <th scope="col">Product Picture</th>
-                    <th scope="col">Flash Sale</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <th scope="row">{{ item.id }}</th>
-                    <td>{{ item.date_added.strftime('%Y-%m-%d') }}</td>
-                    <td>{{ item.product_name }}</td>
-                    <td>ksh{{ "%.2f" % item.previous_price }}</td>
-                    <td>ksh{{ "%.2f" % item.current_price }}</td>
-                    <td>{{ 'Yes' if item.in_stock else 'No' }}</td>
-                    <td>
-                        {% if item.product_picture %}
-                            <img src="{{ url_for('static', filename=item.product_picture) }}" alt="{{ item.product_name }}" style="height: 50px; width: 50px; border-radius: 2px;">
-                        {% else %}
-                            No Image
-                        {% endif %}
-                    </td>
-                    <td>{{ 'Yes' if item.flash_sale else 'No' }}</td>
-                    <td>
-                        <a href="/update-item/{{ item.id }}" class="btn" style="background-color: #000000; color: #ffffff; margin-bottom: 5px;">Update</a>
-                        <br>
-                        <a href="/delete-item/{{ item.id }}" class="btn" style="background-color: #ff1493; color: #ffffff;">Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-dark table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Previous Price</th>
+                        <th scope="col">Current Price</th>
+                        <th scope="col">In Stock</th>
+                        <th scope="col">Product Picture</th>
+                        <th scope="col">Flash Sale</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.date_added.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td class="text-danger">Ksh {{ "%.2f" % item.previous_price }}</td>
+                        <td class="text-success">Ksh {{ "%.2f" % item.current_price }}</td>
+                        <td>
+                            {% if item.in_stock > 0 %}
+                                <span class="badge bg-success">In Stock</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.product_picture %}
+                                <img src="{{ url_for('static', filename=item.product_picture) }}" 
+                                     alt="{{ item.product_name }}" 
+                                     class="img-thumbnail" 
+                                     style="height: 50px; width: 50px;">
+                            {% else %}
+                                <span class="text-muted">No Image</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.flash_sale %}
+                                <span class="badge bg-warning text-dark">Yes</span>
+                            {% else %}
+                                <span class="badge bg-secondary">No</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.category }}</td>
+                        <td class="text-truncate" style="max-width: 200px;">
+                            {{ item.description if item.description else 'No description available' }}
+                        </td>
+                        <td>
+                            <a href="/update-item/{{ item.id }}" class="btn btn-outline-primary btn-sm">Update</a>
+                            <a href="/delete-item/{{ item.id }}" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

@@ -37,7 +37,8 @@ class PasswordChangeForm(FlaskForm):
 
 class ShopItemsForm(FlaskForm):
     product_name = StringField('Name of Product', validators=[DataRequired()])
-    description = TextAreaField('Description', validators=[DataRequired()])
+    description = TextAreaField(
+        'Product Description', validators=[DataRequired()])
     current_price = FloatField('Current Price', validators=[DataRequired()])
     previous_price = FloatField('Previous Price', validators=[DataRequired()])
     in_stock = IntegerField('In Stock', validators=[
