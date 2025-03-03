@@ -23,11 +23,13 @@ def home():
 
 @views.route('/products')
 def products():
+    # Get filter parameters from the request
     min_price = request.args.get('min_price', type=float)
     max_price = request.args.get('max_price', type=float)
     category_id = request.args.get('category_id', type=int)
     flash_sale = request.args.get('flash_sale', type=bool)
 
+    # Start with a base query
     query = Product.query
 
     # Apply filters based on request parameters
