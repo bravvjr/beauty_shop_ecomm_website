@@ -1,40 +1,49 @@
-{% extends 'base.html' %}
+{% extends 'admin.html' %}
 
 {% block title %} Add Shop Items {% endblock %}
 
 
 {% block body %}
 
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Product Name</th>
-            <th scope="col">Previous Price</th>
-            <th scope="col">Current Price</th>
-            <th scope="col">In Stock</th>
-            <th scope="col">Picture</th>
-            <th scope="col">Flash Sale</th>
-            <th scope="col">Add</th>
+<form action="" method="POST" enctype="multipart/form-data" class="container blur p-4 shadow-lg rounded bg-dark text-white" style="width: 50%;">
+    {{ form.hidden_tag() }}
 
-        </tr>
-    </thead>
+    <h2 class="text-center mb-4">Update Product</h2>
 
-    <tbody>
-        <tr>
-            <form action="" method="POST", enctype="multipart/form-data">
-                {{ form.hidden_tag() }}
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        {{ form.product_name(class="form-control") }}
+    </div>
 
-                <td>{{ form.product_name }}</td>
-                <td>{{ form.previous_price }}</td>
-                <td>{{ form.current_price }}</td>
-                <td>{{ form.in_stock }}</td>
-                <td>{{ form.product_picture() }}</td>
-                <td>{{ form.flash_sale }}</td>
-                <td>{{ form.update_product() }}</td>
-            </form>
-        </tr>
-    </tbody>
-</table>
+    <div class="mb-3">
+        <label class="form-label">Previous Price</label>
+        {{ form.previous_price(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Current Price</label>
+        {{ form.current_price(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">In Stock</label>
+        {{ form.in_stock(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Product Picture</label>
+        {{ form.product_picture(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Flash Sale</label>
+        {{ form.flash_sale(class="form-check-input") }}
+    </div>
+
+    <div class="text-center">
+        {{ form.update_product(class="btn btn-primary") }}
+    </div>
+</form>
 
 
 {% endblock %}

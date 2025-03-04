@@ -1,13 +1,11 @@
 {% extends 'admin.html' %} {% block title %}Shop Items{% endblock %} {% block
 body %}
-<div class="container mt-5">
   {% if items | length < 1 %}
   <h3 style="color: #d63384; text-align: center">No Shop Items</h3>
   {% else %}
+  <h3 style="color: #ffffff; text-align: center">Products</h3>
   <table
-    class="table table-hover"
-    style="background-color: #ffffff; color: #000000"
-  >
+    class="table table-dark table-hover">
     <thead style="background-color: #ff69b4; color: #ffffff">
       <tr>
         <th scope="col">ID</th>
@@ -19,7 +17,7 @@ body %}
         <th scope="col">Product Picture</th>
         <th scope="col">Flash Sale</th>
         <th scope="col">Category</th>
-        <th scope="col">Action</th>
+        <th scope="col">Stock</th>
       </tr>
     </thead>
     <tbody>
@@ -63,10 +61,10 @@ body %}
         <td>
           {% if item.in_stock > 0 %}
           <a
-            href="/add-to-cart/{{ item.id }}"
+            href="#"
             class="btn"
             style="background-color: #28a745; color: #ffffff"
-            >Add to Cart</a
+            >In Stock</a
           >
           {% else %}
           <button
@@ -83,5 +81,4 @@ body %}
     </tbody>
   </table>
   {% endif %}
-</div>
 {% endblock %}

@@ -233,7 +233,7 @@ def confirm_payment():
 
         if order:
             # Update the order status to 'paid'
-            order.status = 'paid'
+            order.status = 'PAID'
             db.session.commit()
             flash('Payment confirmed! Thank you for your purchase.')
         else:
@@ -291,7 +291,7 @@ def place_order():
             # Create a single order in the database
             new_order = Order(
                 items=items,
-                status='pending',
+                status='PENDING',
                 payment_id=response.get('id'),
                 phone_number=phone_number,
                 customer_link=current_user.id

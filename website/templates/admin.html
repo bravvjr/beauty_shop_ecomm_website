@@ -74,6 +74,7 @@
             class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4"
           >
             <div class="container-fluid">
+              <img src="../static/images/beauty-health-heart-svgrepo-com.svg" alt="" style="width: 20px; height: 20px;">
               <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3" href="/">
                 Beauty Shop
               </a>
@@ -95,21 +96,17 @@
               <div class="collapse navbar-collapse" id="navigation">
                 <ul class="navbar-nav mx-auto">
                   <li class="nav-item">
-                    <a
-                      class="nav-link d-flex align-items-center me-2 active"
-                      aria-current="page"
-                      href="/customers"
-                    >
-                      <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                      Customers
-                    </a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link me-2" href="/shop-items">
                       <i class="fa fa-user opacity-6 text-dark me-1"></i>
                       Products
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-2" href="/customers">
+                      Customers
+                    </a>
+                  </li>
+                 
                   <li class="nav-item">
                     <a class="nav-link me-2" href="/add-shop-items">
                       <i
@@ -185,10 +182,12 @@
                     ></button>
                   </div>
                   {% endfor %} 
-
+                    
                   <!-- Add a container for the table -->
                   <div class="table-container">
-                    {% block body %} {% endblock %}
+                    {% block body %}
+                    
+                    {% endblock %}
                   </div>
                 </div>
               </div>
