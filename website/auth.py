@@ -73,10 +73,6 @@ def log_out():
     logout_user()
     return redirect('/')
 
-@auth.route('/user-profile')
-@login_required
-def user_profile():
-    return render_template('user_profile.html')
 
 @auth.route('/profile/<int:customer_id>')
 @login_required

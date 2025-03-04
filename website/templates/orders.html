@@ -1,14 +1,14 @@
-{% extends 'user_profile.html' %}
+{% extends 'base.html' %}
 
 {% block title %} Orders {% endblock %}
 
 {% block body %}
 
-<div class="container mt-5" style="background-color: #ffffff; color: #000; padding: 20px; border-radius: 10px;">
+<div class="container mt-5" style="background-color: rgba(82, 81, 82, 0.5); color: #f30597; padding: 20px; border-radius: 10px;">
     <h1 class="text-center">Orders</h1>
     <h4 class="text-center text-muted">Recent Orders</h4>
 
-    <div class="card p-4 shadow-lg" style="background-color: #f9f9f9; border-radius: 10px; color: #000;">
+    <div class="card p-4 shadow-lg" style="background-color: rgba(82, 81, 82, 0.5); border-radius: 10px; color: #f30597;">
         {% for order in orders %}
         <div class="accordion" id="ordersAccordion">
             <div class="accordion-item">
@@ -16,13 +16,13 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
                         data-bs-target="#collapse{{ order.id }}" aria-expanded="false" 
                         aria-controls="collapse{{ order.id }}" 
-                        style="background-color: #f0f0f0; font-weight: bold; color: #000;">
+                        style="background-color: rgb(58, 58, 58); font-weight: bold; color: #ffffff;">
                         Order {{ order.id }} - Status: {{ order.status }}
                     </button>
                 </h2>
                 <div id="collapse{{ order.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ order.id }}" 
                     data-bs-parent="#ordersAccordion">
-                    <div class="accordion-body" style="background-color: #ffffff; color: #000;">
+                    <div class="accordion-body" style="background-color: rgba(58, 58, 58, 0.617); color: #ffffff;">
                         <p><strong>Payment ID:</strong> {{ order.payment_id }}</p>
                         <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
                         <p><strong>Products:</strong></p>
