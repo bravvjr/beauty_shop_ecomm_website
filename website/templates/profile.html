@@ -10,14 +10,14 @@
         <!-- Welcome Message -->
         <div class="col-12 text-center mb-5">
             <h2 class="fw-bold text-gradient">Welcome, <span class="text-capitalize">{{ customer.username }}</span>!</h2>
-            <p class="text-muted">Manage your profile and settings here.</p>
+            <p class="text-muted"  style="color: black;">Manage your profile and settings here.</p>
         </div>
 
         <!-- Sidebar Section -->
         <div class="col-lg-3 col-md-4 mb-4">
             <div class="card shadow-sm border-0">
                 <div class="card-body text-center p-4">
-                    <h5 class="card-title fw-bold">{{ customer.username }}</h5>
+                    <h5 class="card-title fw-bold" >{{ customer.username }}</h5>
                     <p class="text-muted small">{{ customer.email }}</p>
                     <ul class="list-unstyled mt-3">
                         <li class="mb-2">
@@ -45,30 +45,29 @@
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <p class="text-muted small mb-1">Username</p>
-                                <p class="fw-bold">{{ customer.username }}</p>
+                                <p class="fw-bold black-text">{{ customer.username }}</p>
                             </div>
                             <div class="mb-4">
                                 <p class="text-muted small mb-1">Email</p>
-                                <p class="fw-bold">{{ customer.email }}</p>
+                                <p class="fw-bold black-text">{{ customer.email }}</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <p class="text-muted small mb-1">Joined</p>
-                                <p class="fw-bold">{{ customer.date_joined }}</p>
+                                <p class="fw-bold black-text">{{ customer.date_joined }}</p>
                             </div>
                             <div class="mb-4">
                                 <p class="text-muted small mb-1">Last Login</p>
-                                <p class="fw-bold">{{ customer.last_login }}</p>
+                                <p class="fw-bold black-text">{{ customer.last_login }}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="text-end mt-4">
+                    <!-- <div class="text-end mt-4">
                         <a href="#" class="btn btn-primary">
-                            <i class="fas fa-edit me-2"></i>Edit Profile
-                        </a>
+                            <i class="fas fa-edit me-2"></i>Edit Profile </a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -76,10 +75,14 @@
 
 <!-- Optional: Add a gradient text utility class -->
 <style>
+    .black-text {
+        color: black;
+    }
     .text-gradient {
         background: linear-gradient(90deg, #ff416c, #ff4b2b);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        /* text-decoration-color: black; */
     }
 </style>
 
