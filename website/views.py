@@ -244,6 +244,31 @@ def confirm_payment():
     # Redirect to the orders page
     return redirect(url_for('views.orders'))
 
+@views.route('/intasend-challenge', methods=['GET'])
+def intasend_challenge():
+    challenge = request.args.get('challenge')
+    return challenge if challenge else "No challenge provided", 200
+
+@views.route('/intasend-webhook', methods=['POST'])
+def intasend_webhook():
+    data = request.json  # Get JSON data from IntaSend
+    payment_id = data.get('payment_id')
+    status = data.get('status')
+
+    print("Webhook Received:", data)  # Debugging
+
+    if payment_id and status == 'COMPLETE':
+        order = Order.query.filter_by(payment_id=payment_id).first()
+        if order:
+            order.status = 'PAID'
+            db.session.commit()
+            print("Order updated to PAID.")
+        else:
+            print("Order not found for Payment ID:", payment_id)
+    
+    return jsonify({'message': 'Webhook received'}), 200
+
+
 @views.route('/place-order', methods=['POST'])
 @login_required
 def place_order():
@@ -280,7 +305,7 @@ def place_order():
             response = service.collect.checkout(
                 phone_number=phone_number,
                 email=current_user.email,
-                amount=15,  # Testing amount
+                amount=total,  # Testing amount
                 currency='KES',
                 comment='Purchase of goods',
                 redirect_url=redirect_url,
