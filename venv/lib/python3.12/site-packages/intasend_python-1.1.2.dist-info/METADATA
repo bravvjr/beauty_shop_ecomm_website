@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: intasend-python
+Version: 1.1.2
+Summary: Official Python SDK for IntaSend Payments Gateway API
+Home-page: https://github.com/IntaSend/intasend-python
+Author: Felix Cheruiyot
+Author-email: support@intasend.com
+License: MIT
+Keywords: payments,mpesa,mpesa api,card payments,visa,mastercard,payments kenya,mpesa stk-push,stk push,intasend,airtime
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+License-File: LICENSE
+Requires-Dist: requests
+
