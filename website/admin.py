@@ -236,3 +236,25 @@ def categories():
     )
 
     return render_template('categories.html', categories=categories, search_query=search_query, form=form)
+
+@admin.route('/add-category', methods=['POST'])
+@login_required
+def add_category():
+    name = request.form.get('name')
+
+    if not name:
+        flash('Category name cannot be empty!', 'danger')
+        return redirect(url_for('admin.categories'))  # Make sure to reference 'admin.categories'
+
+    # Check if category already exists
+    existing_category = Category.query.filter_by(name=name).first()
+    if existing_category:
+        flash('Category already exists!', 'warning')
+        return redirect(url_for('admin.categories'))
+
+    new_category = Category(name=name)
+    db.session.add(new_category)
+    db.session.commit()
+    flash('Category added successfully!', 'success')
+
+    return redirect(url_for('admin.categories'))
