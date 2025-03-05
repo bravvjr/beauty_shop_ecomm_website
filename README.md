@@ -1,4 +1,4 @@
-# E-Commerce Platform for Women's Beauty Products
+# E-Commerce Platform for Cosmetic Products
 
 Welcome to the future of beauty shopping! Our platform is designed to revolutionize the way customers discover, explore, and purchase skincare, makeup, hair care, and other beauty essentials.
 
@@ -105,7 +105,7 @@ Welcome to the future of beauty shopping! Our platform is designed to revolution
    - The app will be available at `http://127.0.0.1:5000/`.
 
 ---
-### *Future Updates*
+## Future Updates
 
 ### Reviews and Ratings
 - Users can leave reviews on products after making a purchase.
@@ -121,6 +121,17 @@ Welcome to the future of beauty shopping! Our platform is designed to revolution
 ## About
 This e-commerce platform specializes in beauty and cosmetic products, providing users with a seamless shopping experience, secure transactions, and easy navigation. Built with Flask, it supports authentication, product management, and smooth payment integration.
 
-For more details, refer to the project documentation.
+
+---
+
+## Created By
+- [Bravin Murambi.](https://github.com/bravvjr)
+- [Daniel Mburu.](https://github.com/waweru89)
+- [Betty Jelagat.](https://github.com/bettyje)
+- [Wilson Ngugi.](https://github.com/willisntannpc)
+- [Nelly Mwendwa.](https://github.com/nelly2040)
+- [Esther Kamau.](https://github.com/essie-kamau043)
+
+
 
 
