@@ -9,6 +9,7 @@ from website.models import Category
 
 
 
+
 class SignUpForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired()])
     username = StringField('Username', validators=[
@@ -65,3 +66,15 @@ class OrderForm(FlaskForm):
                                                         ('Delivered', 'Delivered'), ('Canceled', 'Canceled')])
 
     update = SubmitField('Update Status')
+    
+
+class CategoryForm(FlaskForm):
+    name = StringField(
+        'Category Name',
+        validators=[
+            DataRequired(message="Category name is required."),
+            Length(min=2, max=50,
+                   message="Category name must be between 2 and 50 characters.")
+        ]
+    )
+    submit = SubmitField('ADD Category')

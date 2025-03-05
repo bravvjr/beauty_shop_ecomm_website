@@ -6,7 +6,7 @@ from . import db
 from datetime import datetime
 from .forms import ShopItemsForm, OrderForm
 import os
-
+from .forms import CategoryForm
 
 admin = Blueprint('admin', __name__)
 
@@ -23,40 +23,30 @@ def add_shop_items():
         return render_template('404.html'), 403
 
     form = ShopItemsForm()
-    
     form.category_id.choices = [(category.id, category.name)
                                 for category in Category.query.all()]
 
     if form.validate_on_submit():
-        product_name = form.product_name.data
-        current_price = form.current_price.data
-        previous_price = form.previous_price.data
-        in_stock = form.in_stock.data
-        description = form.description.data
-        flash_sale = form.flash_sale.data
-        category_id = form.category_id.data
-
         file = form.product_picture.data
         file_name = secure_filename(file.filename)
         file_path = os.path.join('./media', file_name)
         file.save(file_path)
 
-        new_product = Product (
-            product_name=product_name,
-            current_price=current_price,
-            previous_price=previous_price,
-            in_stock=in_stock,
-            description=description,
-            flash_sale=flash_sale,
+        new_product = Product(
+            product_name=form.product_name.data,
+            current_price=form.current_price.data,
+            previous_price=form.previous_price.data,
+            in_stock=form.in_stock.data,
+            description=form.description.data,
+            flash_sale=form.flash_sale.data,
             product_picture=file_path,
-            category_id=category_id
-            )
-    
+            category_id=form.category_id.data
+        )
 
         try:
             db.session.add(new_product)
             db.session.commit()
-            flash(f'{product_name} added successfully!', 'success')
+            flash(f'{new_product.product_name} added successfully!', 'success')
             return redirect(url_for('admin.shop_items'))
         except Exception as e:
             db.session.rollback()
@@ -110,24 +100,21 @@ def update_item(item_id):
 @admin.route('/delete-item/<int:item_id>', methods=['GET', 'POST'])
 @login_required
 def delete_item(item_id):
-    if current_user.id == 1:
-        try:
-            # Find the product to delete
-            item_to_delete = Product.query.get_or_404(item_id)
+    if current_user.id != 1:
+        return render_template('404.html'), 403
 
-            # Delete all related rows in the cart table
-            Cart.query.filter_by(product_link=item_id).delete()
+    try:
+        item_to_delete = Product.query.get_or_404(item_id)
+        Cart.query.filter_by(product_link=item_id).delete()
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        flash('Product and related cart items deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error: {e}")
+        flash(f'Failed to delete product. Error: {e}', 'danger')
 
-            # Delete the product
-            db.session.delete(item_to_delete)
-            db.session.commit()
-            flash('Product and related cart items deleted successfully!', 'success')
-        except Exception as e:
-            db.session.rollback()
-            print(f"Error: {e}")
-            flash(f'Failed to delete product. Error: {e}', 'danger')
-        return redirect('/shop-items')
-    return render_template('404.html'), 403
+    return redirect('/shop-items')
 
 
 @admin.route('/view-orders')
@@ -183,7 +170,11 @@ def admin_page():
 
 
 @admin.route('/inventory')
+@login_required
 def inventory():
+    if current_user.id != 1:
+        return render_template('404.html'), 403
+
     inventory = Product.query.with_entities(
         Product.id, Product.product_name, Product.category_id, Product.in_stock, Product.date_added
     ).all()
@@ -207,7 +198,7 @@ def edit_inventory(id):
         try:
             db.session.commit()
             flash('Inventory item updated successfully!', 'success')
-            return redirect(url_for('inventory'))
+            return redirect(url_for('admin.inventory'))
         except Exception as e:
             db.session.rollback()
             flash('Failed to update inventory item. Please try again.', 'danger')
@@ -216,45 +207,32 @@ def edit_inventory(id):
     return render_template('edit_inventory.html', item=item)
 
 
-@admin.route('/categories')
+@admin.route('/categories', methods=['GET', 'POST'])
 @login_required
 def categories():
     if current_user.id != 1:
         flash('You do not have permission to access this page.', 'danger')
         return render_template('404.html'), 403
 
+    form = CategoryForm()  
+
+    if form.validate_on_submit():
+        new_category = Category(name=form.name.data)
+        db.session.add(new_category)
+        db.session.commit()
+        flash('Category added successfully!', 'success')
+        return redirect(url_for('admin.categories'))
+
     search_query = request.args.get('search', '')
-
     page = request.args.get('page', 1, type=int)
-
     per_page = 10
 
     query = Category.query
-
     if search_query:
         query = query.filter(Category.name.ilike(f'%{search_query}%'))
 
     categories = query.order_by(Category.created_at.asc()).paginate(
-        page=page, per_page=per_page, error_out=False)
+        page=page, per_page=per_page, error_out=False
+    )
 
-    return render_template('categories.html', categories=categories, search_query=search_query)
-
-
-@admin.route('/payments')
-@login_required
-def payments():
-    if current_user.id != 1:
-        return render_template('404.html'), 403
-
-    search_query = request.args.get('search', '')
-    page = request.args.get('page', 1, type=int)
-    per_page = 10
-
-    query = Payment.query
-    if search_query:
-        query = query.filter(Payment.transaction_id.ilike(f'%{search_query}%'))
-
-    payments = query.order_by(Payment.created_at.desc()).paginate(
-        page=page, per_page=per_page)
-
-    return render_template('payments.html', payments=payments, search_query=search_query)
+    return render_template('categories.html', categories=categories, search_query=search_query, form=form)
