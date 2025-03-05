@@ -5,7 +5,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="/website/static/images/new-oragen-logo-2-1.webp"
+      href="/website/static/images/beauty-health-heart-svgrepo-com.svg"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -43,6 +43,101 @@
     />
 
     <title>Beauty Shop | {% block title %} {% endblock %}</title>
+    <style>
+      /* Style the slider track (the background) */
+      input[type="range"] {
+        -webkit-appearance: none; 
+        width: 100%;
+        height: 8px;
+        background: #e8e0e3; 
+        border-radius: 5px;
+        outline: none;
+      }
+    
+      /* Style the slider thumb (the handle) */
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #fcfbfb; 
+        border-radius: 50%;
+        cursor: pointer;
+      }
+  
+    
+      input[type="range"]::-ms-thumb {
+        width: 20px;
+        height: 20px;
+        background: #f3f3f3; 
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    
+    
+      .navbar a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Animated Underline on Navbar Links */
+.navbar-nav a {
+    position: relative;
+    text-decoration: none;
+    padding-bottom: 5px;
+    transition: color rgb(241, 4, 123) 0.3s ease-in-out;
+}
+
+.navbar-nav a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(236, 9, 126);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav a:hover::after,
+.navbar-nav a.active::after {
+    transform: scaleX(1);
+}
+
+/* Shrinking Navbar on Scroll */
+.navbar {
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar.shrink {
+    padding: 5px 10px; 
+    background: rgba(0, 0, 0, 0.8); 
+}
+
+    
+    
+     
+    </style>
+    
   </head>
   <body>
     <!-- navbar section -->
@@ -61,6 +156,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <img src="../static/images/beauty-health-heart-svgrepo-com.svg" alt="logo" width="30" height="30" margin-top="5px" class="d-inline-block align-text-top">
             <li class="nav-item">
               <a
                 class="nav-link active"
@@ -121,7 +217,7 @@
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item mx-2" id="items">
-            <a class="nav-link text-white" href="#"
+            <a class="nav-link text-white" href="{{ url_for('views.product_section') }}"
               ><span class="badge bg-success"></span> Shop
               <i class="bi bi-bag-fill"></i>
             </a>
@@ -143,7 +239,7 @@
           </li>
 
           <li class="nav-item mx-2" id="items">
-            <a class="nav-link text-white" href="#"
+            <a class="nav-link text-white" href="/wishlist"
               ><span class="badge bg-success"></span> WishList
               <i class="fa-solid fa-heart"></i>
             </a>
@@ -164,7 +260,7 @@
             <ul
               class="dropdown-menu"
               aria-labelledby="profileDropdown"
-              style="background-color: #FF2D81"
+              style="background-color: black"
             >
               {% if current_user.is_authenticated %}
               <li>
@@ -221,23 +317,80 @@
       ></button>
     </div>
     {% endfor %} {% block body %} {% endblock %}
-
-    <footer
-      class="container-fluid text-center p-2 mt-5"
-      style="background-color: #FF2D81; color: white"
-    >
-      <a href="https://github.com/bravvjr" style="color: rgb(253, 253, 253)"
-        >ORAGEN</a
-      >
-      | <span> <i class="fa-sharp fa-regular fa-copyright"></i></span> 2025 Game
-      on
+    <footer class="footer">
+      <div class="container">
+        <div class="row text-center text-md-start align-items-center">
+          <!-- Social Media Icons -->
+          <div class="col-md-2 mb-2">
+            <div>
+              <a href="#" class="text-pink me-2"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="text-pink me-2"><i class="bi bi-youtube"></i></a>
+              <a href="#" class="text-pink"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+    
+          <!-- Use Cases -->
+          <div class="col-md-2 mb-2">
+            <h6 class="text-uppercase fw-bold">Created By</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://github.com/bravvjr">Bravin Murambi</a></li>
+              <li><a href="https://github.com/waweru89">Daniel Mburu</a></li>
+              <li><a href="https://github.com/bettyje">Betty Jelagat</a></li>
+              <li><a href="https://github.com/willisntannpc">Wilson Ngugi</a></li>
+              <li><a href="https://github.com/nelly2040">Nelly Mwendwa</a></li>
+              <li><a href="https://github.com/essie-kamau043">Esther Kamau</a></li>
+            </ul>
+          </div>
+            </div>
+      </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    
+    <style>
+      
+      .footer {
+        background-color: black; 
+        color: #ff69b4; 
+        padding: 40px 0;
+        position: relative;
+        width: 100%;
+      }
+    
+      
+      .footer a {
+        text-decoration: none;
+        color: #ff69b4; 
+      }
+    
+      .footer a:hover {
+        color: #ff1493; 
+      }
+    
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+    
+      .footer {
+        margin-top: auto;
+      }
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="{{ url_for( 'static', filename='js/owl.carousel.min.js') }}"></script>
     <script src="{{ url_for( 'static', filename='js/all.min.js') }}"></script>
     <script src="{{ url_for( 'static', filename='js/jquery.js') }}"></script>
 
     <script src="{{ url_for( 'static', filename='js/myScript.js') }}"></script>
+    <script>
+   window.addEventListener("scroll", function () {
+    let navbar = document.querySelector(".navbar");
+    if (window.scrollY > 50) {
+        navbar.classList.add("shrink");
+    } else {
+        navbar.classList.remove("shrink");
+    }
+});
+</script>
   </body>
 </html>

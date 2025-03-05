@@ -44,6 +44,7 @@ def sign_up():
 
     return render_template('signup.html', form=form)
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -65,6 +66,7 @@ def login():
 
     return render_template('login.html', form=form)
 
+
 @auth.route('/logout', methods=['GET', 'POST'])
 @login_required
 def log_out():
@@ -77,7 +79,6 @@ def log_out():
 def profile(customer_id):
     customer = Customer.query.get(customer_id)
     return render_template('profile.html', customer=customer)
-
 
 @auth.route('/change-password/<int:customer_id>', methods=['GET', 'POST'])
 @login_required
@@ -102,3 +103,13 @@ def change_password(customer_id):
             flash('Current Password is Incorrect')
 
     return render_template('change_password.html', form=form)
+
+@auth.route('/wishlist')
+@login_required
+def wishlist():
+    return render_template('wishlist.html')
+
+@auth.route('/products')
+@login_required
+def products():
+    return render_template('products.html', items=your_product_data)

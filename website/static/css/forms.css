@@ -18,10 +18,7 @@
 }
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../images/bgmain.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
+    url("../images/pexels-marcelo-moreira-988124-1926620-1920x1080.png");
 }
 .base .base-content {
   position: absolute;

@@ -1,90 +1,165 @@
-{% extends 'base.html' %}
-
-{% block title %} Cart {% endblock %}
-
-
-{% block body %}
-
+{% extends 'base.html' %} {% block title %}Cart{% endblock %} {% block body %}
 <div class="container my-5">
-    <div class="row">
-        {% if cart %}
-
-        <h1 class="text-center mb-5" style="color: white;">Shopping Cart</h1>
-        <div class="col-sm-8">
-            <div class="card">
-                <div class="card-body" style="color: rgb(237, 11, 120);">
-
-                    {% for item in cart %}
-
-                    <div class="row" style="color: rgb(237, 11, 120);">
-                        <div class="col-sm-3 text-center align-self-center">
-                            <img src="{{ item.product.product_picture }}" alt="" class="img-fluid img-thumbnail shadow-sm" height="150px" width="150px">
-                        </div>
-                        <div class="col-sm-9" style="color:rgb(237, 11, 120);">
-                            <div>
-                                <h3>{{ item.product.product_name }}</h3>
-                                <div class="my-3" style="color: rgb(237, 11, 120);">
-                                    <label for="quantity">Quantity</label>
-                                    <a class="minus-cart btn" pid="{{item.id}}"><i class="fas fa-minus-square fa-lg"></i></a>
-                                    <span id="quantity">{{ item.quantity }}</span>
-                                    <a class="plus-cart btn " pid="{{ item.id }}"><i class="fas fa-plus-square fa-lg"></i></a>
-
-                                </div>
-
-                                <div class="d-flex justify-content-between" style="color: rgb(237, 11, 120);">
-                                    <p class="mb-0"><span><strong>Ksh {{ item.product.current_price }}</strong></span></p>
-                                    <a href="" class="remove-cart btn btn-sm btn-secondary mr-3 " pid="{{item.id}}">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-
-                    {% endfor %}
-                </div>
+  <div class="row">
+    {% if cart %}
+    <h1 class="text-center mb-5" style="color: #ffffff">Shopping Cart</h1>
+    <div class="col-sm-8">
+      <div
+        class="card"
+        style="
+          background-color: rgba(82, 81, 82, 0.5);
+          border: 1px solid #f8d1e9;
+        "
+      >
+        <div class="card-body" style="color: #000000">
+          {% for item in cart %}
+          <div class="row">
+            <div class="col-sm-3 text-center align-self-center">
+              <img
+                src="{{ item.product.product_picture }}"
+                alt="{{ item.product.product_name }}"
+                class="img-fluid img-thumbnail shadow-sm"
+                style="max-height: 150px; max-width: 150px"
+              />
             </div>
-        </div>
-
-        <div class="col-sm-4" style="color: rgb(237, 11, 120);">
-            <div class="card" style="color: rgb(237, 11, 120);">
-                <div class="card-body" style="color: rgb(237, 11, 120);">
-                    <h3 color="black">Cart Summary </h3>
-                    <hr color="black">
-                    <ul class="list-group">
-                        {% for item in cart %}
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"><strong>{{item.product.product_name}}</strong><span id="amount">{{item.product.current_price}} X <span id="quantity{{item.id}}">{{ item.quantity}}</span></span></li>
-
-                        {% endfor %}
-
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">Amount <span>Ksh <span id="amount_tt">{{ amount }}</span></span></li>
-
-                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                            <div style="margin-top: 15px;">
-                                <strong>Total</strong><small>(Including Shipping)</small>
-                            </div>
-                            <span><strong>Ksh </strong><span id="totalamount"><strong>{{ total }}</strong></span></span>
-    
-                        </li>
-
-                    </ul>
-
-                    <div class="d-grid"><a href="/place-order" class="btn btn-danger">Place Order</a></div>
-
+            <div class="col-sm-9">
+              <div>
+                <h3 style="color: #ffffff">{{ item.product.product_name }}</h3>
+                <div class="my-3">
+                  <label for="quantity" style="color: #ffffff">Quantity</label>
+                  <a
+                    class="minus-cart btn"
+                    pid="{{ item.id }}"
+                    style="color: #ff1493"
+                    ><i class="fas fa-minus-square fa-lg"></i
+                  ></a>
+                  <span id="quantity" style="color: #ffffff"
+                    >{{ item.quantity }}</span
+                  >
+                  <a
+                    class="plus-cart btn"
+                    pid="{{ item.id }}"
+                    style="color: #ff1493"
+                    ><i class="fas fa-plus-square fa-lg"></i
+                  ></a>
                 </div>
+                <div class="d-flex justify-content-between">
+                  <p class="mb-0" style="color: #ffffff">
+                    <span
+                      ><strong
+                        >Ksh {{ "%.2f" % item.product.current_price }}</strong
+                      ></span
+                    >
+                  </p>
+                  <a
+                    href="#"
+                    class="remove-cart btn btn-sm"
+                    pid="{{ item.id }}"
+                    style="background-color: #ff14a9; color: #ffffff"
+                    >Remove</a
+                  >
+                </div>
+              </div>
             </div>
+          </div>
+          <hr style="border-color: #f30597" />
+          {% endfor %}
         </div>
-
-
-
-        {% else %}
-
-        <h1 class="text-center mb-5" style="color: white;">Your Cart is Empty</h1>
-
-        {% endif %}
+      </div>
     </div>
+
+    <div class="col-sm-4">
+      <!-- cart -->
+      <div
+        class="card"
+        style="
+          background-color: rgba(82, 81, 82, 0.5);
+          border: 1px solid #f8d1e9;
+        "
+      >
+        <div class="card-body" style="color: white">
+          <h3 style="color: #ffffff">Cart Summary</h3>
+          <hr style="border-color: #d63384" />
+          <ul
+            class="list-group"
+            style="padding: 10px; background-color: rgba(82, 81, 82, 0.5)"
+          >
+            {% for item in cart %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+              style="background-color: transparent"
+            >
+              <strong style="color: white"
+                >{{ item.product.product_name }}</strong
+              >
+              <span style="color: white"
+                >Ksh {{ "%.2f" % item.product.current_price }} X
+                <span id="quantity{{ item.id }}"
+                  >{{ item.quantity }}</span
+                ></span
+              >
+            </li>
+            {% endfor %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+              style="background-color: transparent"
+            >
+              Amount
+              <span style="color: white"
+                >Ksh <span id="amount_tt">{{ "%.2f" % amount }}</span></span
+              >
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
+              style="background-color: transparent"
+            >
+              <div style="margin-top: 15px">
+                <strong style="color: white">Total</strong>
+              </div>
+              <span style="color: white"
+                ><strong>Ksh </strong
+                ><span id="totalamount"
+                  ><strong>{{ "%.2f" % total }}</strong></span
+                ></span
+              >
+            </li>
+          </ul>
+          <!-- <div class="d-grid">
+            <a
+              href="/place-order"
+              class="btn"
+              style="background-color: #d63384; color: #ffffff"
+              >Place Order</a
+            >
+          </div> -->
+          <form action="{{ url_for('views.place_order') }}" method="POST">
+            <div class="mb-3">
+              <label for="phone_number" class="form-label"
+                ><strong>Enter your Mpesa phone number:</strong></label
+              >
+              <input
+                type="text"
+                id="phone_number"
+                name="phone_number"
+                class="form-control"
+                placeholder="Enter Phone number 2547XXXXXXXX"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn"
+              style="background-color: #d63384; color: #ffffff";
+            >
+              <strong>Proceed To Checkout</strong> 
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <h1 class="text-center mb-5" style="color: #f5f3f4">Your Cart is Empty</h1>
+    {% endif %}
+  </div>
 </div>
-
-
 {% endblock %}

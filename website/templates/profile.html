@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block body %}
+
+<div class="container my-5" style="background-color: rgba(82, 81, 82, 0.5); color: #f30597; padding: 20px; border-radius: 10px;">
+    <div class="row">
+        <!-- Welcome Message -->
+        <div class="col-12 text-center mb-5">
+            <h2 class="fw-bold text-gradient">Welcome, <span class="text-capitalize">{{ customer.username }}</span>!</h2>
+            <p class="text-muted"  style="color: white;">Manage your profile and settings here.</p>
+        </div>
+
+        <!-- Sidebar Section -->
+        <div class="col-lg-3 col-md-4 mb-4" style="background-color: rgba(82, 81, 82, 0.5); color: #f30597; padding: 20px; border-radius: 10px;">
+            <div class="card shadow-sm border-0" style="background-color: rgba(82, 81, 82, 0.5); color: #f30597; padding: 20px; border-radius: 10px;">
+                <div class="card-body text-center p-4">
+                    <h5 class="card-title fw-bold " >{{ customer.username }}</h5>
+                    <p class=" small black-text">{{ customer.email }}</p>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2">
+                            <a href="#" class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-circle me-2"></i>Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/change-password/{{ customer.id }}" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-key me-2"></i>Change Password
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Info Section -->
+        <div class="col-lg-9 col-md-8">
+            <div class="card shadow-lg border-0"  style="background-color: rgba(82, 81, 82, 0.5); color: #f30597; padding: 20px; border-radius: 10px;">
+                <div class="card-body p-4" style="background-color: rgba(82, 81, 82, 0.5); color: #f30597; padding: 20px; border-radius: 10px;">
+                    <h4 class="card-title fw-bold mb-4"><i class="fas fa-user me-2"></i>Profile Information</h4>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <p class="small mb-1 black-text">Username</p>
+                                <p class="fw-bold black-text">{{ customer.username }}</p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="small mb-1 black-text">Email</p>
+                                <p class="fw-bold black-text">{{ customer.email }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <p class=" small mb-1 black-text">Joined</p>
+                                <p class="fw-bold black-text">{{ customer.date_joined }}</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .black-text {
+        color: white;
+    }
+    .text-gradient {
+        background:  #f30597;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
+
+{% endblock %}
