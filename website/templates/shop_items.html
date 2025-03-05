@@ -18,8 +18,7 @@ body %} {% if items | length < 1 %}
       <th scope="col">Flash Sale</th>
       <th scope="col">Edit Product</th>
       <th scope="col">Inventory</th>
-     <th scope="col">Stock</th>
-
+      <th scope="col">Stock</th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +57,7 @@ body %} {% if items | length < 1 %}
           >Delete</a
         >
       </td>
+      <td>{{ item.in_stock }}</td>
       <td>
         {% if item.in_stock > 0 %}
         <a
