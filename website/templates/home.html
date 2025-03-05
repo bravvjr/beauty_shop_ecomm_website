@@ -37,16 +37,14 @@
           <span style="color: #FF2D81;">FEEL</span> GOOD <br />
         </h1>
         <h5 className="text-white mt-3 mb-4">
-          Your beauty routine should be like a great joke—effortless, timeless, and always making someone smile
+          Beauty is not about perfection; it's about embracing your uniqueness and enhancing the confidence that already shines within you. Because when you feel beautiful, you radiate beauty.
         </h5>
         <button 
   type="button" 
   class="btn custom-btn mt-3"
-  
-> <a class="nav-link text-white" href="{{ url_for('views.product_section') }}"
-><span class="badge bg-success"></span> Shop
-<i class="bi bi-bag-fill"></i>
-</a>
+>
+  SHOP NOW
+  <i class="bi bi-bag-fill"></i>
 </button>
       </div>
     </div>
@@ -176,7 +174,7 @@
         FLASH SALE
       </h2>
       <h6 className="text-white mt-3 mb-4" data-aos="fade-right">
-        Explore our bundle deals of natural beauty essentials and get the best value on the market.
+        Explore our flash sale assortment of natural beauty essentials and get the best deals on the market.
       </h6>
     </div>
     <div
@@ -184,14 +182,15 @@
       style="margin: 8px; background-color: rgba(82, 81, 82, 0.5)"
       id="column"
     >
-        {% for item in items %}
+    {% for item in items %}
+
       <div class="col" style="background-color: rgba(82, 81, 82, 0.5)">
         <img
           src="{{ item.product_picture }}"
           alt=""
           style="
             height: 200px;
-            width: 200px;
+            width: 250px;
             border-radius: 10px;
             margin-top: 10px;
           "
@@ -215,31 +214,7 @@
           </div>
 
           <div class="col">
-            <a
-              href="/add-to-cart/{{ item.id }}"
-              style="
-                background-color: #FF2D81;
-                color: white;
-                padding: 5px 10px;
-                border-radius: 5px;
-                text-decoration: none;
-              "
-            >
-            <i class="bi bi-cart-fill"></i>
-            </a>
-            <a
-              href="/add-to-wishlist/{{ item.id }}"
-              style="
-                margin-left: 10px;
-                background-color: #FF2D81;
-                color: black;
-                padding: 5px 10px;
-                border-radius: 5px;
-                text-decoration: none;
-              "
-            >
-              ⭐
-            </a>
+            <a href="/add-to-cart/{{ item.id }}">Add</a>
           </div>
         </div>
 
@@ -247,113 +222,12 @@
           <p>{{ item.in_stock }} Units Left</p>
         </div>
       </div>
-    {% endfor %}
+
+      {% endfor %}
+
       </div>
     </div>
   </div>
-      <!-- ABOUT -->
-      <section id="about" class="section-padding" >
-        <div class="container" style="padding: 0rem 2.5rem 0rem">
-            <div class="row">
-                <div class="col-12 text-center" data-aos="fade-down" data-aos-delay="50">
-                    <div class="section-title">
-                        <h1 class="display-4 fw-semibold">Explore</h1>
-                        <div class="line"></div>
-                        <p>Explore Our Assortment of Green and Natural Beauty Essentials</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-between align-items-center" style="background-color: rgba(82, 81, 82, 0.5)">
-                <div class="col-lg-6" data-aos="fade-down" data-aos-delay="50">
-                    <img src="../static/images/image0_0 (4).jpg" alt="" style="width: 100% ; height: auto">
-                </div>
-                <div data-aos="fade-down" data-aos-delay="150" class="col-lg-5">
-                    <h1>More On Pink</h1>
-                    <p class="mt-3 mb-4">Whether it’s a tried-and-true skin care regimen, how often you wash your hair, or the cosmetics you’re curious about, beauty is personal.
-
-                      That’s why we rely on a diverse group of writers, educators, and other experts to share their tips on everything from how product application varies to the best sheet mask for your individual needs.</p>
-                    <div class="d-flex pt-4 mb-3">
-                        <div class="iconbox me-4">
-                            <i class="ri-service-fill"></i>
-                        </div>
-                        <div>
-                            <h5>Clients</h5>
-                            <p>The utmost satisfaction of our clients is
-                                the supreme aim of our activity and
-                                the basics on which we build our
-                                future. We aspire to attain utmost
-                                excellence in serving our clients.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="iconbox me-4">
-                            <i class="ri-user-5-fill"></i>
-                        </div>
-                        <div>
-                            <h5>Employees</h5>
-                            <p>We pay a particular attention to the
-                                employees. We invest in training and
-                                good work conditions. We encourage a
-                                respectful behavior one toward
-                                another.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <div class="iconbox me-4">
-                            <i class="ri-rocket-2-fill"></i>
-                        </div>
-                        <div>
-                            <h5>Professionalism</h5>
-                            <p>We appreciate our activities in innovations 
-                                and knowledge. We improve continuously the 
-                                processes and we always strive for perfection.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-          <div class="row">
-              <div class="col-12 text-center" data-aos="fade-down" data-aos-delay="150">
-                  <div class="section-title">
-                      <h1 class="display-4 fw-semibold">Reviews</h1>
-                      <div class="line"></div>
-                      <p>These Reviews aim to reflect the professionalism and success of our beauty products while remaining versatile and adaptable to each customer's needs.</p>
-                  </div>
-              </div>
-          </div>
-          
-          <!-- reviews -->
-          <div class="row gy-5 gx-4">
-              <div class="col-lg-4 col-sm-6" data-aos="fade-down" data-aos-delay="150">
-                  <div class="review">
-                      <div class="review-head p-4">
-                          <div class="text-warning">
-                              <i class="ri-star-fill"></i>
-                              <i class="ri-star-fill"></i>
-                              <i class="ri-star-fill"></i>
-                              <i class="ri-star-fill"></i>
-                              <i class="ri-star-fill"></i>
-                          </div>
-                          <p>Their expertise and dedication have been instrumental in streamlining our 
-                              small beauty shop. Their professional team understands the importance of maintaining client relationships, 
-                              which has been crucial for us.</p>
-                      </div>
-                      <div class="review-person mt-4 d-flex align-items-center">
-                          <img class="rounded-circle" src="../static/images/pexels-chidimma-peace-162266897-11377297.jpg" alt="">
-                          <div class="ms-3">
-                              <h5>Beauty</h5>
-                              <small>Item</small>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-    </section>
-
 
   {% endblock %}
 </div>
