@@ -1,7 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FloatField, PasswordField, EmailField, BooleanField, SubmitField, SelectField
-from wtforms.validators import DataRequired, length, NumberRange
+from wtforms.validators import DataRequired, length, NumberRange, Email, Length
 from flask_wtf.file import FileField, FileRequired
+from wtforms import FileField, BooleanField,  TextAreaField
+from werkzeug.utils import secure_filename
+from website.models import Category
+
+
 
 
 class SignUpForm(FlaskForm):
@@ -18,8 +23,8 @@ class SignUpForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired()])
     password = PasswordField('Enter Your Password',
-                             validators=[DataRequired()])
-    submit = SubmitField('Log in')
+                             validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField('Login')
 
 
 class PasswordChangeForm(FlaskForm):
@@ -39,10 +44,18 @@ class ShopItemsForm(FlaskForm):
     in_stock = IntegerField('In Stock', validators=[
                             DataRequired(), NumberRange(min=0)])
     product_picture = FileField('Product Picture', validators=[DataRequired()])
+    description = TextAreaField('Product Description', validators=[DataRequired()])
     flash_sale = BooleanField('Flash Sale')
+    category_id = SelectField('Category', coerce=int,
+                              validators=[DataRequired()])
 
     add_product = SubmitField('Add Product')
     update_product = SubmitField('Update')
+    
+    def __init__(self, *args, **kwargs):
+        super(ShopItemsForm, self).__init__(*args, **kwargs)
+        self.category_id.choices = [(category.id, category.name)
+                                    for category in Category.query.all()]
 
 
 class OrderForm(FlaskForm):

@@ -6,6 +6,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from website import db
 
+
 class Customer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -54,8 +55,8 @@ class Product(db.Model):
     product_picture = db.Column(db.String(1000))
     flash_sale = db.Column(db.Boolean, default=False)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
-    category_id = db.Column(db.Integer, db.ForeignKey(
-        'category.id'), nullable=True)
+    category_id = db.Column( db.Integer, db.ForeignKey('category.id'), nullable=True)
+    description = db.Column(db.Text, nullable=True)
 
     # Relationships
     carts = db.relationship('Cart', backref='product', lazy=True)
@@ -88,13 +89,15 @@ class Order(db.Model):
     payment_id = db.Column(db.String(1000))
     phone_number = db.Column(db.String(15), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    customer_link = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
+    customer_link = db.Column(
+        db.Integer, db.ForeignKey('customer.id'), nullable=False)
 
     # Define a relationship to the Customer model
     customer = db.relationship('Customer', backref='orders')
 
     def __repr__(self):
         return f'<Order {self.id}>'
+
 
 class Wishlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -135,13 +138,14 @@ class Inventory(db.Model):
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
-    customer_link = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
+    customer_link = db.Column(
+        db.Integer, db.ForeignKey('customer.id'), nullable=False)
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     transaction_id = db.Column(db.String(100), nullable=False)
     payment_method = db.Column(Enum(
         'credit_card', 'paypal', 'bank_transfer', name='payment_method_enum'), nullable=False)
     status = db.Column(Enum('pending', 'completed', 'failed',
-                           name='payment_status_enum'), nullable=False, default='pending')
+                            name='payment_status_enum'), nullable=False, default='pending')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Relationships
