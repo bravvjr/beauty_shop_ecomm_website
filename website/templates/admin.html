@@ -157,24 +157,25 @@
                 <div
                   class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 >
-                  {% for message in get_flashed_messages() %}
-                  <div
-                    class="alert alert-success alert-dismissible fade show"
-                    role="alert"
-                    style="margin-top: 5px"
-                  >
-                    <strong>{{ message }}</strong>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="alert"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  {% endfor %} 
+                 
                     
                   <!-- Add a container for the table -->
                   <div class="table-container">
+                    {% for message in get_flashed_messages() %}
+                    <div
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                      style="margin-top: 5px"
+                    >
+                      <strong>{{ message }}</strong>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    {% endfor %} 
                     {% block body %}
                     
                     {% endblock %}

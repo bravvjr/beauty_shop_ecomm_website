@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, request, send_from_directory, url_for
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
-from .models import Product, Order, Customer, Cart, Inventory, Category, Payment
+from .models import Product, Order, Customer, Cart, Inventory, Category, Wishlist
 from . import db
 from datetime import datetime
 from .forms import ShopItemsForm, OrderForm
@@ -105,17 +105,28 @@ def delete_item(item_id):
 
     try:
         item_to_delete = Product.query.get_or_404(item_id)
+        
+        # Delete related cart items
         Cart.query.filter_by(product_link=item_id).delete()
+        
+        # Delete or update related wishlist items
+        # Option 1: Delete related wishlist items
+        Wishlist.query.filter_by(product_link=item_id).delete()
+        
+        # Option 2: If you want to keep the wishlist entry but set product_link to NULL
+        # Wishlist.query.filter_by(product_link=item_id).update({Wishlist.product_link: None})
+        
+        # Now delete the product
         db.session.delete(item_to_delete)
         db.session.commit()
-        flash('Product and related cart items deleted successfully!', 'success')
+        
+        flash('Product and related items deleted successfully!', 'success')
     except Exception as e:
         db.session.rollback()
         print(f"Error: {e}")
         flash(f'Failed to delete product. Error: {e}', 'danger')
 
     return redirect('/shop-items')
-
 
 @admin.route('/view-orders')
 @login_required
