@@ -1,49 +1,55 @@
-{% extends 'admin.html' %}
+{% extends 'admin.html' %} {% block title %} Add Shop Items {% endblock %} {%
+block body %}
 
-{% block title %} Add Shop Items {% endblock %}
+<form
+  action=""
+  method="POST"
+  enctype="multipart/form-data"
+  class="container blur p-4 shadow-lg rounded bg-dark text-white"
+  style="width: 50%"
+>
+  {{ form.hidden_tag() }}
 
+  <h2 class="text-center mb-4">Update Product</h2>
 
-{% block body %}
+  <div class="mb-3">
+    <label class="form-label">Product Name</label>
+    {{ form.product_name(class="form-control") }}
+  </div>
 
-<form action="" method="POST" enctype="multipart/form-data" class="container blur p-4 shadow-lg rounded bg-dark text-white" style="width: 50%;">
-    {{ form.hidden_tag() }}
+  <div class="mb-3">
+    <label class="form-label">Previous Price</label>
+    {{ form.previous_price(class="form-control") }}
+  </div>
 
-    <h2 class="text-center mb-4">Update Product</h2>
+  <div class="mb-3">
+    <label class="form-label">Current Price</label>
+    {{ form.current_price(class="form-control") }}
+  </div>
 
-    <div class="mb-3">
-        <label class="form-label">Product Name</label>
-        {{ form.product_name(class="form-control") }}
+  <div class="mb-3">
+    <label class="form-label">In Stock</label>
+    {{ form.in_stock(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Product Picture</label>
+    {{ form.product_picture(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+        <label class="form-label">Category</label>
+        {{ form.category_id(class="form-control") }}  
     </div>
 
-    <div class="mb-3">
-        <label class="form-label">Previous Price</label>
-        {{ form.previous_price(class="form-control") }}
-    </div>
+  <div class="mb-3">
+    <label class="form-label">Flash Sale</label>
+    {{ form.flash_sale(class="form-check-input") }}
+  </div>
 
-    <div class="mb-3">
-        <label class="form-label">Current Price</label>
-        {{ form.current_price(class="form-control") }}
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">In Stock</label>
-        {{ form.in_stock(class="form-control") }}
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Product Picture</label>
-        {{ form.product_picture(class="form-control") }}
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Flash Sale</label>
-        {{ form.flash_sale(class="form-check-input") }}
-    </div>
-
-    <div class="text-center">
-        {{ form.update_product(class="btn btn-primary") }}
-    </div>
+  <div class="text-center">
+    {{ form.update_product(class="btn btn-primary") }}
+  </div>
 </form>
-
 
 {% endblock %}
